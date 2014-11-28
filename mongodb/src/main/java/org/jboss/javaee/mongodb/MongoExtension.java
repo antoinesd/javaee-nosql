@@ -82,7 +82,7 @@ public class MongoExtension implements Extension {
         if (mongoDef == null) {
             log.warning("No mongoDB data sources found, mongo CDI extension will do nothing");
         } else if (moreThanOne) {
-            log.log(Level.WARNING, "You defined more than one mongoDB data source. Only the one with name %s will be "
+            log.log(Level.WARNING, "You defined more than one mongoDB data source. Only the one with name {0} will be "
                     + "created", mongoDef
                     .name());
         }
@@ -97,7 +97,7 @@ public class MongoExtension implements Extension {
 
         if (mongoDef != null) {
             if (bm.getBeans(MongoClient.class, DefaultLiteral.INSTANCE).isEmpty()) {
-                log.log(Level.INFO, "Registering bean for MongoDB datasource %s", mongoDef.name());
+                log.log(Level.INFO, "Registering bean for MongoDB datasource {0}", mongoDef.name());
                 MongoClientURI uri = new MongoClientURI(mongoDef.url());
                 abd.addBean(bm.createBean(new MongoClientBeanAttributes(bm.createBeanAttributes(bm.createAnnotatedType
                         (MongoClient.class))), MongoClient.class, new MongoClientProducerFactory(uri)));
