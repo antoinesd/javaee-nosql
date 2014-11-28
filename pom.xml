@@ -29,7 +29,7 @@
     <name>Nosql Java EE integration</name>
 
     <modules>
-        <module>mogodb</module>
+        <module>mongodb</module>
     </modules>
 
     <properties>

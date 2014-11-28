@@ -28,7 +28,7 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <artifactId>mogodb</artifactId>
+    <artifactId>mongodb</artifactId>
 
     <packaging>jar</packaging>
     <name>mongodb Java EE integration</name>
