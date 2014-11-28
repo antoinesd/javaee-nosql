@@ -1,0 +1,66 @@
+= Java EE 7 / CDI Integration for NoSQL databases
+
+This project is an initiative to ease use of some NoSQL database in Java EE projects. Thru CDI it helps getting natives API object
+to interact with these databases.
+
+Right now only MongoDB integration is provided. We plan to add new database support in the future, when the principle will be
+validated with MongoDB
+
+This Project is licensed under the Apache License 2.0
+
+== Tests
+
+The project provides standalone (able to run without having to install 3rd party software) tests under Junit + Arquillian.
+By default they are launched in a light Weld container. You can launch them with
+
+[source,shell]
+----
+mvn clean verify
+----
+
+But you can also launched them under WildFly 8.2.0
+
+[source,shell]
+----
+mvn clean verify -Pwildfly-test
+----
+
+The first time you'll launch test with this profile, maven will download WildFly so it will take a lot of time.
+
+== MongoDB integration
+
+MongoDB integration provides a way define a MongoDB connection thru `@MongoClientDefinition` annotation.
+
+It works in the same spirit than Java EE `@DataSourceDefinition`. You only have to add this annotation on one class of your project. Like this.
+
+[source,java]
+----
+@MongoClientDefinition(name = "mongoDef", url = "mongodb://localhost")
+
+public class MyClass {
+  ..
+}
+----
+
+Right now the configuration relies only Mongo URI as documented in http://api.mongodb.org/java/2.13/com/mongodb/MongoClientURI.html[MongoDB java driver doc^].
+
+The Integration will provide the corresponding `MongoClient` bean and shortcuts for `DB` and `DBCollection`.
+
+You can use them like this
+
+[source,java]
+----
+public class MyClass {
+
+  @Inject
+  MongoClient mongoClient;
+
+  @Inject
+  @Mongo(db = "testDb")
+  DB myDB;
+
+  @Inject
+  @Mongo(db = "testDb", collection = "testCollection")
+  DBCollection myCollection;
+}
+----
