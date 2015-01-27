@@ -80,9 +80,9 @@ public class MongoExtension implements Extension {
      */
     void checkMongoClientUniqueness(@Observes AfterTypeDiscovery atd) {
         if (mongoDef == null) {
-            log.warning("No mongoDB data sources found, mongo CDI extension will do nothing");
+            log.warning("No MongoDB data sources found, mongo CDI extension will do nothing");
         } else if (moreThanOne) {
-            log.log(Level.WARNING, "You defined more than one mongoDB data source. Only the one with name {0} will be "
+            log.log(Level.WARNING, "You defined more than one MongoDB data source. Only the one with name {0} will be "
                     + "created", mongoDef
                     .name());
         }

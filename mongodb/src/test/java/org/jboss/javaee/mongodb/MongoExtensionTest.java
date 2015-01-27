@@ -78,7 +78,7 @@ public class MongoExtensionTest {
     }
 
     @Test
-    public void shouldInjectedsBeNotNull() {
+    public void shouldInjectedBeNotNull() {
         Assert.assertNotNull(mongoClient);
         Assert.assertNotNull(myDB);
         Assert.assertNotNull(myCollection);
@@ -99,7 +99,7 @@ public class MongoExtensionTest {
     }
 
     @Test
-    public void shouldBeAbbleToInsert() {
+    public void shouldBeAbleToInsert() {
         myCollection.insert(getBasicDBObject());
 
         DBObject myDoc = myCollection.findOne();
