@@ -27,38 +27,31 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
 /**
- *
  * Contains producers for <code>MongoDB</code> elements qualified with {@link Mongo}
  *
  * @author Antoine Sabot-Durand
- * 
  */
 @ApplicationScoped
-public class MongoProducers
-{
+public class MongoProducers {
     @Inject
     private MongoClient mongoClient;
 
     @Produces
     @Mongo
-    protected DB produceDb(InjectionPoint ip)
-    {
+    protected DB produceDb(InjectionPoint ip) {
         String id = getMongoAnnotation(ip).db();
         return mongoClient.getDB(id);
     }
-    
+
     @Produces
     @Mongo
-    protected DBCollection produceCollection(InjectionPoint ip)
-    {
+    protected DBCollection produceCollection(InjectionPoint ip) {
         DB db = produceDb(ip);
         return db.getCollection(getMongoAnnotation(ip).collection());
     }
 
-    protected Mongo getMongoAnnotation(InjectionPoint ip)
-    {
+    protected Mongo getMongoAnnotation(InjectionPoint ip) {
         return ip.getAnnotated().getAnnotation(Mongo.class);
     }
-
 
 }

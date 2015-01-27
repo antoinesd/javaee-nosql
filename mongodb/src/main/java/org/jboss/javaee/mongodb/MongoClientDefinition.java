@@ -36,17 +36,14 @@ import java.lang.annotation.Target;
 @Target(value = {TYPE})
 @Retention(value = RUNTIME)
 @Documented
-public @interface MongoClientDefinition
-{
+public @interface MongoClientDefinition {
     /**
      * @return name by which the data source will be registered.
      */
-     String name();
-    
+    String name();
 
     /**
      * @return description of this data source
-     *
      */
     String description() default "";
 
